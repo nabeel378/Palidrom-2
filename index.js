@@ -59,6 +59,54 @@ let palindirom = (argStr) => {
 // abdsfdcfqb
 let time = new Date().getTime();
 
+function createPalindrome0(st) {
+  // st = palindirom(st);
+  let strCount = {};
+  let strCount2 = {};
+  for (const item of st) {
+    if (strCount[item]) {
+      strCount[item]++;
+    } else strCount[item] = 1;
+  }
+
+  Object.keys(strCount)
+    .sort()
+    .forEach(function (v, i) {
+      strCount2[v] = strCount[v];
+    });
+
+  let left = '';
+  let right = '';
+  let center = '';
+  let isCenter = false;
+  let rev = Object.keys(strCount2).reverse();
+  rev.forEach((item, index) => {
+    console.log(item);
+
+    let dv = 2;
+    console.log(item, 'itemitemitemitemitemitemitemitemitemitemitemitem');
+    if (strCount[item] > 1) {
+      if (!isCenter && strCount[item] % 2 != 0) {
+        center = item;
+        strCount[item]--;
+      }
+
+      dv = strCount[item] / 2;
+      let text = item;
+      let result = text.repeat(dv);
+
+      left += result;
+      // left += Array(dv + 1).join(item);
+      right += result;
+    } else if (strCount[item] == 1) {
+      center = item;
+    }
+  });
+  left = left.split('').sort().join('');
+  right = right.split('').sort().join('');
+  let ans = left + center + Array.from(right).reverse().join('');
+  return ans;
+}
 function createPalindrome(st) {
   // st = palindirom(st);
   let strCount = {};
@@ -81,6 +129,7 @@ function createPalindrome(st) {
   let center = '';
   let isCenter = false;
   let rev = Object.keys(strCount2).reverse();
+
   rev.forEach((item, index) => {
     console.log(item, 'item');
 
@@ -89,6 +138,7 @@ function createPalindrome(st) {
       if (!isCenter && strCount[item] % 2 != 0) {
         if (!center2) {
           center2 = item;
+          center = item;
         }
         strCount[item]--;
         console.log(center, 'center2');
@@ -109,7 +159,7 @@ function createPalindrome(st) {
   right = right.split('').sort().join('');
 
   console.log(center, 'center');
-  center = center ? center : center2;
+  // center = center ? center : center2;
   let ans = left + center + Array.from(right).reverse().join('');
   return ans;
 }
@@ -122,13 +172,103 @@ function isPalindrome(st) {
 
   return reverse === st;
 }
+
+function createPalindrome3(st) {
+  // st = palindirom(st);
+  let strCount = {};
+  let strCount2 = {};
+  for (const item of st) {
+    if (strCount[item]) {
+      strCount[item]++;
+    } else strCount[item] = 1;
+  }
+
+  // Object.keys(strCount)
+  //   .sort()
+  //   .forEach(function (v, i) {
+  //     strCount2[v] = strCount[v];
+  //   });
+  strCount2 = strCount;
+  let left = '';
+  let right = '';
+  let center = '';
+  let center2 = '';
+  let isCenter = false;
+  let rev = Object.keys(strCount2);
+  rev.forEach((item, index) => {
+    let dv = 2;
+    if (strCount[item] > 1) {
+      if (!isCenter && strCount[item] % 2 != 0) {
+        console.log(item, 'center2x');
+        if (!center2) {
+          center2 = item;
+        }
+        center = item;
+        strCount[item]--;
+      }
+
+      dv = strCount[item] / 2;
+      let text = item;
+      let result = text.repeat(dv);
+
+      left += result;
+      // left += Array(dv + 1).join(item);
+      right += result;
+    } else if (strCount[item] == 1) {
+      center = item;
+    }
+  });
+  left = left.split('').sort().join('');
+  right = right.split('').sort().join('');
+  console.log(left[left.length - 1], center2, 'centerd', center);
+
+  if (left[left.length - 1] == center2) {
+    center = center2;
+  } else if (left[left.length - 1] !== center2) {
+    center = center;
+  } else {
+    center = center2 ? center2 : center;
+  }
+  let ans = left + center + Array.from(right).reverse().join('');
+  return ans;
+}
+
 // aaaabbbccc
 // ddeeccc
 
+// 2
 // awwzaigvxuikdqlvshspsvyckttwdzqmarpxglwmpob
 // dtisfxyobndu
-let r1 = createPalindrome('aaaabbbccc');
-let r2 = createPalindrome('ddeecccaaaabbbccc');
+// Your Output (stdout)
+// addgiklmpqstvwwxzazxwwvtsqpmlkigdda
+// Expected Output
+
+// Download
+// abddgiklmpqstvwwxzzxwwvtsqpmlkigddba
+
+// 3
+// Input (stdin)
+
+// Run as Custom Input
+// |
+// Download
+// mgbgikhvjyiigxhsrgekjmjkrs
+// cikmqfxpcybzyhbdrhudjmsoaqdurgjsnjlqogrkcmdtxbyazfxvbprimbcblpnriyvndntmpvjun
+// Your Output (stdout)
+// abbbccddfggghhiijjjkklmmmnnoppqrrrsstuvxyyzxzyyxvutssrrrqpponnmmmlkkjjjiihhgggfddccbbba
+// Expected Output
+
+// Download
+// abbbccddfggghhiiijjjkklmmmnnoppqrrrsstuvxyyzzyyxvutssrrrqpponnmmmlkkjjjiiihhgggfddccbbba
+
+// aaaabbbccc
+// ddeeccc
+// let r1 = createPalindrome3('aaaabbbccc');
+// let r2 = createPalindrome3('ddeeccc');
+let r1 = createPalindrome3('aaaabbbccc');
+let r2 = createPalindrome3('ddeeccc');
+// abbbccddfggghhiijjjkklmmmnnoppqrrrsstuvxyyzxzyyxvutssrrrqpponnmmmlkkjjjiihhgggfddccbbba;
+// abbbccddfggghhiiijjjkklmmmnnoppqrrrsstuvxyyzzyyxvutssrrrqpponnmmmlkkjjjiiihhgggfddccbbba;
 let r3 = createPalindrome(r1 + r2);
 console.log('r1', r1);
 console.log('r2', r2);
