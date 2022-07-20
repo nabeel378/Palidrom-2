@@ -62,17 +62,27 @@ let time = new Date().getTime();
 function createPalindrome(st) {
   // st = palindirom(st);
   let strCount = {};
+  let strCount2 = {};
   for (const item of st) {
     if (strCount[item]) {
       strCount[item]++;
     } else strCount[item] = 1;
   }
 
+  Object.keys(strCount)
+    .sort()
+    .forEach(function (v, i) {
+      console.log(v, strCount[v]);
+      strCount2[v] = strCount[v];
+      console.log(strCount2, 'strCount');
+    });
+
   let left = '';
   let right = '';
   let center = '';
   let isCenter = false;
-  Object.keys(strCount).forEach((item, index) => {
+  let rev = Object.keys(strCount2).reverse();
+  rev.forEach((item, index) => {
     console.log(item);
 
     let dv = 2;
@@ -95,6 +105,8 @@ function createPalindrome(st) {
   });
   left = left.split('').sort().join('');
   right = right.split('').sort().join('');
+
+  console.log(center, 'center');
   let ans = left + center + Array.from(right).reverse().join('');
   return ans;
 }
@@ -107,10 +119,15 @@ function isPalindrome(st) {
 
   return reverse === st;
 }
-// ddefefq
+// aaaabbbccc
+// ddeeccc
 
-// console.log('result', createPalindrome('aacca'));
-console.log('result', createPalindrome('crceraa'));
+let r1 = createPalindrome('aaaabbbccc');
+let r2 = createPalindrome('ddeeccc');
+let r3 = createPalindrome(r1 + r2);
+console.log('r1', r1);
+console.log('r2', r2);
+console.log('aabcccdeedcccbaa', r3);
 // console.log('result', createPalindrome('dtisfxyobndu'));
 let co = new Date().getTime() - time;
 console.log(co / 1000 + ' sec');
