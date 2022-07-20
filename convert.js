@@ -4,8 +4,9 @@ class GFG {
   // of each char in the string.
   // freq[0] for 'a', ...., freq[25] for 'z'
   static countFreq(str, freq, n) {
-    for (i; i < n; i++) {
-      freq[str[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;
+    for (let i = 0; i < n; i++) {
+      console.log(str, i, 'str[i].charAt(0)');
+      freq[str[i].charAt(0) - 'a'.charAt(0)]++;
     }
   }
   // Cases to check whether a palindromic
@@ -14,7 +15,8 @@ class GFG {
     // count_odd to count no of
     // chars with odd frequency
     var count_odd = 0;
-    for (i; i < GFG.MAX_CHAR; i++) {
+
+    for (let i = 0; i < GFG.MAX_CHAR; i++) {
       if (freq[i] % 2 != 0) {
         count_odd++;
       }
@@ -41,7 +43,7 @@ class GFG {
   // char is not present
   static findOddAndRemoveItsFreq(freq) {
     var odd_char = 'a';
-    for (i; i < GFG.MAX_CHAR; i++) {
+    for (let i = 0; i < GFG.MAX_CHAR; i++) {
       if (freq[i] % 2 != 0) {
         freq[i]--;
         odd_char = String.fromCharCode(i + 'a'.charCodeAt(0));
@@ -77,7 +79,7 @@ class GFG {
         // times from the front and rear
         // end. Note that odd character is
         // removed by findOddAndRemoveItsFreq()
-        for (j; j <= parseInt(freq[i] / 2); j++) {
+        for (let j = 0; j <= parseInt(freq[i] / 2); j++) {
           str[front_index++] = ch;
           str[rear_index--] = ch;
         }
@@ -187,7 +189,7 @@ class GFG {
     }
     // print all palindromic permutations
     do {
-      console.log(str);
+      // console.log(str);
     } while (GFG.nextPalin(str, n));
   }
   // Driver program
@@ -198,3 +200,5 @@ class GFG {
   }
 }
 GFG.main([]);
+
+printAllPalinPermutations('asds', n);
