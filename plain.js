@@ -50,6 +50,4 @@ function palindromeCombinations(input) {
   return generatePalindromes(combis, sets.singles);
 }
 
-console.log(
-  palindromeCombinations('awwzaigvxuikdqlvshspsvyckttwdzqmarpxglwmpob')
-);
+console.log(palindromeCombinations('aaaabbbccc'));
