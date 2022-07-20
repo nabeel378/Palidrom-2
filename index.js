@@ -93,7 +93,8 @@ function createPalindrome(st) {
       center = item;
     }
   });
-
+  left = left.split('').sort().join('');
+  right = right.split('').sort().join('');
   let ans = left + center + Array.from(right).reverse().join('');
   return ans;
 }
@@ -109,7 +110,7 @@ function isPalindrome(st) {
 // ddefefq
 
 // console.log('result', createPalindrome('aacca'));
-console.log('result', createPalindrome('dbdawwzigvxkdqlsptmbmtpslqdkxvgizwwa'));
+console.log('result', createPalindrome('crceraa'));
 // console.log('result', createPalindrome('dtisfxyobndu'));
 let co = new Date().getTime() - time;
 console.log(co / 1000 + ' sec');
